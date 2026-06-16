@@ -1,6 +1,6 @@
 # POO — Soirée 18 : Persistance
 
-Atelier de Programmation Orientée Objet — EICPN, Enseignement pour Adultes.
+Atelier de Programmation Orientée Objet
 
 Cet atelier porte sur la **persistance** d'un catalogue de livres : sérialisation
 JSON et reconstruction polymorphe. Vous complétez les fichiers squelette fournis,
@@ -22,7 +22,7 @@ est respecté par le fork lui-même.
 
 **Dans VS Code (panneau Contrôle de code source)**
 
-1. Ouvrez la palette de commandes : `Ctrl+Maj+P` (Windows/Linux) ou `Cmd+Maj+P` (macOS).
+1. Ouvrez la palette de commandes : `Ctrl+Maj+P` (Windows/Linux) ou F1 ou `Cmd+Maj+P` (macOS).
 2. Tapez **Git: Clone**, validez, puis collez l'URL de **votre fork**.
 3. Choisissez un dossier de destination, puis ouvrez le dossier cloné.
 
