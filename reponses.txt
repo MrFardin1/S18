@@ -2,7 +2,7 @@
 POO - Soirée 18 : Persistance - Réponses écrites
 =====================================================================
 
-Nom    :
+Nom    : Bhuiyan Fardin
 Date   :
 
 Complétez les sections ci-dessous. Référez-vous à l'énoncé du TP pour
@@ -18,6 +18,13 @@ alors que taille_estimee() de la S14 n'appelait pas super()
 (remplacement) ? Qu'est-ce qui distingue les deux situations ?
 
 >>>
+Dans to_dict il respecte le principe DRY. il rend explicite que la sous-classe prolonge le parent au lieu de le
+réécrire. Au lieu de reecrire to_dict nous avont récuperer le dictionaire que to_dict nous renvoie et ajouter un autre élément : format_fichier.
+
+Dans taille_estimee de la soirée S14 il y a le taille_estimee du LivreNumerique qui pouvais utilisé l'enrichissement, ce qui est meme preferable.
+Mais dans le cas de taille_estimee du liveAudo le remplacement est total et inévitable. une chaine "96 pages" ne se concatène pas naturellement avec une durée
+"96 pages 2h 15min"
+
 
 
 

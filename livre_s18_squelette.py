@@ -134,7 +134,16 @@ class Livre:
         Returns:
             dict: Données du livre, incluant un discriminateur de type.
         """
-        raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
+        # raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
+        return {
+            "type" : "Livre",
+            "titre" : self._titre,
+            "auteur" : self._auteur,
+            "isbn" : self._isbn,
+            "nb_pages" : self._nb_pages,
+            "annee" : self._annee,
+            "disponible" : self._disponible
+        }
 
     @classmethod
     def from_dict(cls, donnees):
@@ -143,7 +152,19 @@ class Livre:
         Returns:
             Livre: Un livre équivalent à celui qui a été sérialisé.
         """
-        raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
+        # raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
+        livre = cls(
+            donnees["titre"],
+            donnees["auteur"],
+            donnees["isbn"],
+            donnees["nb_pages"],
+            donnees["annee"],
+        )
+        if not donnees["disponible"]:
+            livre.emprunter()
+        return livre
+
+             
 
     # ----- Méthodes métier (fournies) ---------------------------------
 
@@ -234,12 +255,28 @@ class LivreNumerique(Livre):
 
     def to_dict(self):
         """Enrichit le dictionnaire parent avec le format de fichier."""
-        raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
+        donnee = super().to_dict()
+        donnee["type"] = "LivreNumerique"
+        donnee["format_fichier"] = self._format_fichier
+        return donnee
+
 
     @classmethod
     def from_dict(cls, donnees):
         """Reconstruit un LivreNumerique à partir d'un dictionnaire."""
-        raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
+        livre = cls(
+            donnees["titre"],
+            donnees["auteur"],
+            donnees["isbn"],
+            donnees["nb_pages"],
+            donnees["annee"],
+            donnees["format_fichier"]
+        )
+        if not donnees["disponible"]:
+            livre.emprunter()
+        return livre
+        
+
 
     def taille_estimee(self):
         """Retourne 'N pages [FORMAT]'."""
@@ -329,3 +366,19 @@ class LivreAudio(Livre):
             f"nb_pages={self._nb_pages}, annee={self._annee}, "
             f"duree_minutes={self._duree_minutes})"
         )
+
+
+
+if __name__ == "__main__":
+    
+    import json
+    livre = Livre("Harry Potter", "JK Rolling", "1234567890123", 100, 2000)
+    # d = livre.to_dict()
+    # with open("test.json", "w", encoding="utf-8") as fichier:
+    #     json.dump(d, fichier, ensure_ascii=False, indent=2)
+    
+    d = livre.to_dict()
+    print(Livre.from_dict(json.loads(json.dumps(d))) == livre)
+
+    print(LivreNumerique("Fondation", "Asimov","9782070360536", 256, 1951, "EPUB").to_dict()["type"])
+
