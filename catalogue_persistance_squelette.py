@@ -72,14 +72,22 @@ def charger_catalogue_json(chemin):
 
 
 if __name__ == "__main__":
+    pass
         
-        cat = [
-            Livre("Harry Potter", "JK Rolling", "1234567890123", 100, 2000),
-            LivreNumerique("Harry Potter", "JK Rolling", "1234567890123", 100, 2000, "PDF"),
-            LivreAudio("Harry Potter", "JK Rolling", "1234567890123", 100, 2000, 90)
-        ]
+        # import pickle
+        
+        # cat = [
+        #     Livre("Harry Potter", "JK Rolling", "1234567890123", 100, 2000),
+        #     LivreNumerique("Harry Potter", "JK Rolling", "1234567890123", 100, 2000, "PDF"),
+        #     LivreAudio("Harry Potter", "JK Rolling", "1234567890123", 100, 2000, 90)
+        # ]
 
-        sauvegarder_catalogue_json(cat, "S18/catalogue.json")
-        cat2 = charger_catalogue_json("S18/catalogue.json")  
-        print(cat2 == cat)
+        # sauvegarder_catalogue_json(cat, "S18/catalogue.json")
+        # cat2 = charger_catalogue_json("S18/catalogue.json")  
+        # print(cat2 == cat)
+
+        # d = pickle.dumps(cat)
+        
+        # with open("catalogue.pkl", "wb") as fichier:
+        #     pickle.dump(d, fichier)
 

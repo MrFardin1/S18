@@ -63,7 +63,11 @@ moins trois arguments distincts (lisibilité du format ; couplage à la
 définition des classes ; sécurité au chargement d'une source non
 fiable).
 
->>>
+>>> Je retiens le format JSON car:
+- pickle est illisible et non éditable à la main.
+- changer le nom d'une classe peut rendre les ancien fichier illisible.
+- au chargement d'une source non fiable risque exécuter du code arbitraire. 
+
 
 
 
@@ -73,12 +77,21 @@ Exercice 6 - Diagnostic
 1. Symptôme observé (sans l'expliquer) :
 
 >>>
+voici ce qu'affiche l'output :
+Livre           328 pages
+Livre           96 pages
+Livre           159 pages
+
+tout les livre affiché sont que des livres or _CATALOGUE_JSON contient un livre, un livre numerique et un livre audio. Suite a quoi il manque également des champs
+
 
 
 2. Cause (ce que charger_catalogue fait de la donnée présente dans le
    fichier mais ignorée à la relecture) :
 
 >>>
+durent la relecture, uniquement la méthode taille_estimee de la classe livre est appélée car on ne prend pas en considération le type.
+
 
 
 (Le test garde-fou et la correction de charger_catalogue vont dans les

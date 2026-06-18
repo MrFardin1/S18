@@ -22,7 +22,7 @@ Programmation Orientée Objet - EICPN 2025-2026.
 
 import json
 
-from livre_s18_squelette import Livre
+from livre_s18_squelette import Livre, LivreNumerique, LivreAudio
 
 
 # Représentation JSON d'un catalogue sauvegardé précédemment.
@@ -58,6 +58,12 @@ _CATALOGUE_JSON = """[
   }
 ]"""
 
+_FABRIQUES = {
+    "Livre": Livre,
+    "LivreNumerique": LivreNumerique,
+    "LivreAudio": LivreAudio,
+}
+
 
 def charger_catalogue(contenu_json):
     """Reconstruit un catalogue à partir de sa représentation JSON.
@@ -71,13 +77,7 @@ def charger_catalogue(contenu_json):
     donnees = json.loads(contenu_json)
     livres = []
     for entree in donnees:
-        livre = Livre(
-            entree["titre"],
-            entree["auteur"],
-            entree["isbn"],
-            entree["nb_pages"],
-            entree["annee"],
-        )
+        livre = _FABRIQUES[entree["type"]].from_dict(entree)
         livres.append(livre)
     return livres
 
