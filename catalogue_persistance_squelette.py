@@ -18,7 +18,7 @@ from livre_s18_squelette import Livre, LivreNumerique, LivreAudio
 
 
 # Registre discriminateur "type" -> classe. À COMPLÉTER (voir l'énoncé).
-_FABRIQUES = {}
+_FABRIQUES = {"Livre" : Livre, "LivreNumerique" : LivreNumerique, "LivreAudio" : LivreAudio}
 
 
 def livre_depuis_dict(donnees):
@@ -36,8 +36,14 @@ def livre_depuis_dict(donnees):
     Raises:
         ValueError: Si le champ "type" est absent ou inconnu du registre.
     """
-    raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
 
+    if "type" not in donnees:
+        raise ValueError('le champ "type" est absent ou inconnu du registre.') 
+    return _FABRIQUES[donnees["type"]].from_dict(donnees)
+    
+    
+
+        
 
 def sauvegarder_catalogue_json(livres, chemin):
     """Sauvegarde un catalogue (liste de livres) au format JSON.
@@ -46,8 +52,9 @@ def sauvegarder_catalogue_json(livres, chemin):
         livres (list[Livre]): Catalogue, éventuellement hétérogène.
         chemin (str): Chemin du fichier de destination.
     """
-    raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
-
+    donnees = [livre.to_dict() for livre in livres]
+    with open(chemin,"w", encoding="utf-8") as fichier:
+        json.dump(donnees, fichier, ensure_ascii=False, indent=2)
 
 def charger_catalogue_json(chemin):
     """Recharge un catalogue depuis un fichier JSON, types exacts restaurés.
@@ -58,4 +65,21 @@ def charger_catalogue_json(chemin):
     Returns:
         list[Livre]: Le catalogue reconstruit.
     """
-    raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
+    with open(chemin, "r", encoding="utf-8") as fichier:
+        donnees = json.load(fichier)
+        return [livre_depuis_dict(entree) for entree in donnees]
+    
+
+
+if __name__ == "__main__":
+        
+        cat = [
+            Livre("Harry Potter", "JK Rolling", "1234567890123", 100, 2000),
+            LivreNumerique("Harry Potter", "JK Rolling", "1234567890123", 100, 2000, "PDF"),
+            LivreAudio("Harry Potter", "JK Rolling", "1234567890123", 100, 2000, 90)
+        ]
+
+        sauvegarder_catalogue_json(cat, "S18/catalogue.json")
+        cat2 = charger_catalogue_json("S18/catalogue.json")  
+        print(cat2 == cat)
+

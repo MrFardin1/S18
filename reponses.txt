@@ -33,19 +33,24 @@ Exercice 4 - Question AA3 (principe ouvert/fermé)
 ---------------------------------------------------------------------
 1. Énoncez le principe ouvert/fermé.
 
->>>
+>>> 
+Nous pouvons ajouter d'autes types de livre dans le registre (Ouvert l'extension) sans changer la fonction livre_depuis_dict 
+pour ajouter ces nouveaux types.(Fermée à la modification)
 
 
 2. En quoi la cascade if/elif le violait-elle, et en quoi le registre
-   le respecte-t-il ?
+   le respecte-t-il ? 
 
 >>>
+la cascade if/elif ne respecte pas la partie fermé à la modification. 
 
 
 3. Que faudrait-il modifier, dans chaque version, pour ajouter demain
    un type LivreBraille ?
+   
 
 >>>
+Ajouter une ligne "LivreBraille : LivreBraille dans _FABRIQUES suffit. 
 
 
 

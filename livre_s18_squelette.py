@@ -341,12 +341,27 @@ class LivreAudio(Livre):
 
     def to_dict(self):
         """Enrichit le dictionnaire parent avec la durée d'écoute."""
-        raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
+        donnee = super().to_dict()
+        donnee["type"] = "LivreAudio"
+        donnee["duree_minutes"] = self._duree_minutes
+        return donnee
 
     @classmethod
     def from_dict(cls, donnees):
         """Reconstruit un LivreAudio à partir d'un dictionnaire."""
-        raise NotImplementedError("À implémenter - voir l'énoncé du TP.")
+        
+        livre = cls(
+            donnees["titre"],
+            donnees["auteur"],
+            donnees["isbn"],
+            donnees["nb_pages"],
+            donnees["annee"],
+            donnees["duree_minutes"]
+        )
+        if not donnees["disponible"]:
+            livre.emprunter()
+        return livre
+        
 
     def taille_estimee(self):
         """Retourne 'Xh YYmin', ou 'YYmin' si moins d'une heure."""
